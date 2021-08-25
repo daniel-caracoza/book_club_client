@@ -1,0 +1,116 @@
+type Query {
+  me: User
+
+  getClubs: [Club!]
+
+  clubTopics(clubId: String!): [ClubTopic!]
+
+  topicComments(clubTopicId: String!): [Comment!]!
+
+  apiServiceSearch(route: String!, searchTerm: String!): [ApiServiceSearchResponse!]
+
+  userBooks: [Book!]!
+}
+
+type User {
+  id: ID!
+
+  username: String!
+
+  email: String!
+}
+
+type Club {
+  id: Float!
+
+  clubName: String!
+}
+
+type ClubTopic {
+  id: String!
+
+  topic: String!
+
+  comments: [Comment!]!
+}
+
+type Comment {
+  sender: String!
+
+  comment: String!
+
+  date: DateTime!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type ApiServiceSearchResponse {
+  title: String!
+
+  image: String!
+
+  publisher: String
+
+  isbn13: String!
+
+  synopsys: String
+
+  pages: Int
+
+  authors: [String!]!
+}
+
+type Book {
+  id: Float!
+
+  bookTitle: String!
+
+  image: String!
+
+  author: String!
+
+  currentPage: Int!
+}
+
+type Mutation {
+  register(password: String!, email: String!, username: String!): User!
+
+  login(password: String!, username: String!): LoginResponse
+
+  createClub(clubName: String!, clubId: String!): Club!
+
+  createTopic(topic: String!, clubId: String!): ClubTopic
+
+  topicComment(comment: String!, clubTopicId: String!): Comment
+
+  addToReadingList(book: BookInput!): Book!
+}
+
+type LoginResponse {
+  accessToken: String!
+
+  user: User!
+}
+
+input BookInput {
+  id: Float!
+
+  bookTitle: String!
+
+  image: String!
+
+  author: String!
+}
+
+type Subscription {
+  subscribeToTopic(clubTopicId: String!): Comment!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

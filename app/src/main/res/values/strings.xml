@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BookClub</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="failed_login">Invalid username or password</string>
+    <string name="register_success">Please confirm email</string>
+    <string name="current_page">current page: </string>
+    <string name="notes">notes +</string>
+    <string name="enter_page">enter page</string>
+    <string name="list_is_empty">Your reading list is empty!</string>
+    <string name="add_to_reading_list">Add to Reading List</string>
+</resources>

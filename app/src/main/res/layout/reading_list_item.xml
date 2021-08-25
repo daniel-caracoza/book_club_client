@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="databaseBook"
+            type="com.example.bookclub.models.DatabaseBook" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/book_img"
+                android:layout_width="75dp"
+                android:layout_height="0dp"
+                app:bindImage="@{databaseBook.image}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{databaseBook.bookTitle}"
+                app:layout_constraintStart_toEndOf="@id/book_img"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{databaseBook.author}"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintStart_toEndOf="@id/book_img"/>
+
+            <TextView
+                android:id="@+id/currentPage_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/current_page"
+                app:layout_constraintTop_toBottomOf="@id/author"
+                app:layout_constraintStart_toEndOf="@id/book_img"/>
+
+            <EditText
+                android:id="@+id/currentPage_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/currentPage_text"
+                app:layout_constraintBottom_toBottomOf="@id/currentPage_text"
+                app:layout_constraintTop_toTopOf="@id/currentPage_text"
+                android:hint="@string/enter_page"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/notes_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notes"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                app:layout_constraintStart_toEndOf="@id/book_img"
+                app:layout_constraintTop_toBottomOf="@id/currentPage_text"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/actionOverflowButtonStyle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

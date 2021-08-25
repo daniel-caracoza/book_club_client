@@ -1,0 +1,9 @@
+query UserBooks{
+    userBooks{
+        id
+        bookTitle
+        author
+        image
+        currentPage
+    }
+}

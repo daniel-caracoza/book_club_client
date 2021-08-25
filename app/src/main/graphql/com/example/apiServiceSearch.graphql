@@ -1,0 +1,11 @@
+query ApiServiceSearch($searchTerm:String!, $route:String!){
+    apiServiceSearch(searchTerm:$searchTerm, route:$route){
+        title
+        image
+        publisher
+        isbn13
+        synopsys
+        pages
+        authors
+    }
+}
