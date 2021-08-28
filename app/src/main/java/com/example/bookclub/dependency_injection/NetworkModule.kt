@@ -10,25 +10,30 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
+import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import java.net.CookieManager
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Singleton
     @Provides
     fun provideAuthInterceptorOkhttpClient(
         sp: SharedPreferences
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(AuthorizationInterceptor(sp))
+            .cookieJar(JavaNetCookieJar(CookieManager()))
             .build()
     }
 
     private class AuthorizationInterceptor(val sp: SharedPreferences): Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
-            val token = sp.getString("token", null)
+            val token = sp.getString("token", "")
             val request = chain.request().newBuilder()
                 .addHeader("Authorization", "bearer $token")
                 .build()
@@ -37,6 +42,7 @@ object NetworkModule {
         }
     }
 
+    @Singleton
     @Provides
     fun provideEncryptedSharedPreferences(
         @ApplicationContext context: Context

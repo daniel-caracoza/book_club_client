@@ -21,7 +21,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val response = authRepository.getUserBooks()
             val booksList = response.data!!.userBooks
-            val domainBookList = booksList.mapToDatabaseBook()
+            val domainBookList = booksList?.mapToDatabaseBook()
             liveResponse.postValue(domainBookList)
         }
         return liveResponse

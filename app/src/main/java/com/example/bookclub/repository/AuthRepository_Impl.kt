@@ -1,15 +1,12 @@
 package com.example.bookclub.repository
 
-import androidx.lifecycle.LiveData
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import com.example.ApiServiceSearchQuery
-import com.example.LoginMutation
+import com.example.RefreshAccessTokenMutation
 import com.example.UserBooksQuery
 import com.example.bookclub.database.Database
-import com.example.bookclub.models.DatabaseBook
-import com.example.bookclub.models.UsersBooks
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -27,6 +24,12 @@ class AuthRepository_Impl(
     override suspend fun getUserBooks(): Response<UserBooksQuery.Data> {
         return withContext(Dispatchers.IO){
             apolloClient.query(UserBooksQuery()).await()
+        }
+    }
+
+    override suspend fun refreshAccessToken(): Response<RefreshAccessTokenMutation.Data> {
+        return withContext(Dispatchers.IO){
+            apolloClient.mutate(RefreshAccessTokenMutation()).await()
         }
     }
 

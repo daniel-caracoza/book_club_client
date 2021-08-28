@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import javax.inject.Qualifier
+import javax.inject.Singleton
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
@@ -20,6 +21,7 @@ annotation class NonAuthApolloClient
 @InstallIn(SingletonComponent::class)
 object ApolloModule {
 
+    @Singleton
     @AuthApolloClient
     @Provides
     fun provideAuthClient(authOkHttpClient: OkHttpClient): ApolloClient {

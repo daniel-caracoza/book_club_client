@@ -33,7 +33,6 @@ class ReadingListAdapter: ListAdapter<DatabaseBook, ReadingListAdapter.ViewHolde
         holder.bind(getItem(position))
     }
 
-
 }
 
 class ReadingListItemDiffCallback: DiffUtil.ItemCallback<DatabaseBook>() {

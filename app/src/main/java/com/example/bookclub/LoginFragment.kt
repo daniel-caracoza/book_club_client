@@ -9,9 +9,13 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.bookclub.databinding.FragmentLoginBinding
+import com.example.bookclub.dependency_injection.RefreshTokenCoroutineWorker
 import com.example.bookclub.viewModels.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.util.concurrent.TimeUnit
 
 
 class LoginFragment : Fragment() {
@@ -36,6 +40,10 @@ class LoginFragment : Fragment() {
         loginViewModel.loginSuccess.observe(viewLifecycleOwner, {
             it?.let {
                 if(it){
+                    val refreshAccessWorkRequest = PeriodicWorkRequestBuilder<RefreshTokenCoroutineWorker>(15, TimeUnit.MINUTES)
+                        .setInitialDelay(15, TimeUnit.MINUTES)
+                        .build()
+                    WorkManager.getInstance(requireContext()).enqueue(refreshAccessWorkRequest)
                     val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                     findNavController().navigate(action)
                 }
