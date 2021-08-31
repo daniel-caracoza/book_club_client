@@ -1,6 +1,7 @@
 package com.example.bookclub.dependency_injection
 
 import com.apollographql.apollo.ApolloClient
+import com.example.bookclub.database.Database
 import com.example.bookclub.repository.Repository
 import com.example.bookclub.repository.Repository_Impl
 import dagger.Module
@@ -16,9 +17,10 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideRepository(
-        @AuthApolloClient apolloClient: ApolloClient
+        @AuthApolloClient apolloClient: ApolloClient,
+        db: Database
     ): Repository {
-        return Repository_Impl(apolloClient)
+        return Repository_Impl(apolloClient, db)
     }
 
 }

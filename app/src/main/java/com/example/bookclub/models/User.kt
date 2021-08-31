@@ -1,23 +1,22 @@
 package com.example.bookclub.models
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Entity
 data class User (
     @PrimaryKey
-    val userId: Int,
+    val userId: String,
     val username: String
 )
 
 @Entity(primaryKeys = ["userId", "bookId"])
 data class UsersBooks (
-    val userId: Int,
+    val userId: String,
     val bookId: Double
     )
 
 
-data class userWithBooks(
+data class UserWithBooks(
     @Embedded
     val user: User,
 
@@ -28,4 +27,5 @@ data class userWithBooks(
     )
     val books: List<DatabaseBook>
 )
+
 

@@ -9,6 +9,8 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.bookclub.databinding.FragmentLoginBinding
@@ -40,10 +42,14 @@ class LoginFragment : Fragment() {
         loginViewModel.loginSuccess.observe(viewLifecycleOwner, {
             it?.let {
                 if(it){
-                    val refreshAccessWorkRequest = PeriodicWorkRequestBuilder<RefreshTokenCoroutineWorker>(15, TimeUnit.MINUTES)
+                    val refreshAccessWorkRequest = PeriodicWorkRequestBuilder<RefreshTokenCoroutineWorker>(15, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
                         .setInitialDelay(15, TimeUnit.MINUTES)
                         .build()
-                    WorkManager.getInstance(requireContext()).enqueue(refreshAccessWorkRequest)
+                    WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
+                        "refreshTokenWorkRequest",
+                        ExistingPeriodicWorkPolicy.REPLACE,
+                        refreshAccessWorkRequest
+                    )
                     val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                     findNavController().navigate(action)
                 }

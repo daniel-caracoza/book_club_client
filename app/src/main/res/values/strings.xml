@@ -15,4 +15,9 @@
     <string name="enter_page">enter page</string>
     <string name="list_is_empty">Your reading list is empty!</string>
     <string name="add_to_reading_list">Add to Reading List</string>
+    <string name="search_for_books">Search for books</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="clubs">Clubs</string>
+    <string name="clear_search">Clear search item</string>
 </resources>

@@ -7,6 +7,8 @@ import com.example.ApiServiceSearchQuery
 import com.example.RefreshAccessTokenMutation
 import com.example.UserBooksQuery
 import com.example.bookclub.database.Database
+import com.example.bookclub.models.SearchItem
+import com.example.bookclub.models.UserWithSearchItems
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -30,6 +32,18 @@ class AuthRepository_Impl(
     override suspend fun refreshAccessToken(): Response<RefreshAccessTokenMutation.Data> {
         return withContext(Dispatchers.IO){
             apolloClient.mutate(RefreshAccessTokenMutation()).await()
+        }
+    }
+
+    override suspend fun getUserRecentSearchItems(): UserWithSearchItems {
+        return withContext(Dispatchers.IO){
+            db.searchItemDao.userSearchItems()
+        }
+    }
+
+    override suspend fun deleteSearchItem(searchItem: SearchItem) {
+        withContext(Dispatchers.IO){
+            db.searchItemDao.deleteSearchItem(searchItem)
         }
     }
 

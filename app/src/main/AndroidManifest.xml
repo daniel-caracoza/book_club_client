@@ -20,7 +20,10 @@
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

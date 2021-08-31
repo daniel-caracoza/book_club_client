@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo.exception.ApolloNetworkException
+import com.example.bookclub.models.User
 import com.example.bookclub.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -47,8 +48,12 @@ class LoginViewModel @Inject constructor(
                     _loginFailed.value = true
                 } else {
                     val accessToken = response.data!!.login!!.accessToken
+                    val networkUser = response.data!!.login!!.user
+                    val domainUser = User(networkUser.id, networkUser.username)
+                    repository.insertUser(domainUser)
                     with(sharedPreferences.edit()){
                         putString("token", accessToken)
+                        putString("userId", domainUser.userId)
                         apply()
                     }
                     _loginSuccess.value = true

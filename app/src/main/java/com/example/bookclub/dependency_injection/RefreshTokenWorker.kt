@@ -17,15 +17,14 @@ class RefreshTokenCoroutineWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
 ): CoroutineWorker(appContext, workerParams) {
-    @Inject
-    lateinit var authRepository: AuthRepository
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    @Inject lateinit var authRepository: AuthRepository
+
+    @Inject lateinit var sharedPreferences: SharedPreferences
+
     override suspend fun doWork(): Result {
         return try {
             val mutationData = authRepository.refreshAccessToken()
             val accessToken = mutationData.data?.refreshAccessToken?.accessToken
-            Log.d("RefreshToken", accessToken.toString())
             with(sharedPreferences.edit()){
                 putString("token", accessToken)
                 apply()
