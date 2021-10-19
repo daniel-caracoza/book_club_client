@@ -1,9 +1,11 @@
 package com.example.bookclub.viewModels
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.security.crypto.EncryptedSharedPreferences
 import com.example.bookclub.models.SearchItem
 import com.example.bookclub.models.UserWithSearchItems
 import com.example.bookclub.repository.AuthRepository
@@ -17,10 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val sharedPreferences: SharedPreferences
 ): ViewModel() {
-
-    private val job = Job()
-    private val coroutineScope = CoroutineScope(Dispatchers.IO + job)
 
     private val _recentSearchItems: MutableLiveData<UserWithSearchItems> by lazy {
         MutableLiveData<UserWithSearchItems>()
@@ -32,15 +32,35 @@ class SearchViewModel @Inject constructor(
         getUserRecentSearches()
     }
 
+    fun addUserRecentSearch(recentSearch: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val userId = sharedPreferences.getString("userId", null);
+            userId?.let {
+                val searchItem = SearchItem(
+                    0,
+                    it,
+                    recentSearch
+                )
+                authRepository.addUserRecentSearch(searchItem)
+                getUserRecentSearches()
+            }
+
+        }
+    }
+
     private fun getUserRecentSearches() {
         viewModelScope.launch {
-            _recentSearchItems.value = authRepository.getUserRecentSearchItems()
+            val userId = sharedPreferences.getString("userId", null);
+            userId?.let {
+                _recentSearchItems.value = authRepository.getUserRecentSearchItems(userId)
+            }
         }
     }
 
     fun deleteSearchItem(searchItem: SearchItem) {
-        viewModelScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             authRepository.deleteSearchItem(searchItem)
+            getUserRecentSearches()
         }
     }
 

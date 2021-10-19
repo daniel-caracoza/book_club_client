@@ -3,12 +3,11 @@ package com.example.bookclub.repository
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
-import com.example.ApiServiceSearchQuery
-import com.example.RefreshAccessTokenMutation
-import com.example.UserBooksQuery
+import com.example.*
 import com.example.bookclub.database.Database
 import com.example.bookclub.models.SearchItem
 import com.example.bookclub.models.UserWithSearchItems
+import com.example.type.BookInput
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -20,6 +19,12 @@ class AuthRepository_Impl(
     override suspend fun apiServiceSearch(searchTerm: String, route: String): Response<ApiServiceSearchQuery.Data> {
         return withContext(Dispatchers.IO){
             apolloClient.query(ApiServiceSearchQuery(searchTerm, route)).await()
+        }
+    }
+
+    override suspend fun findByISBN(isbn: String): Response<FindByIsbnQuery.Data> {
+        return withContext(Dispatchers.IO){
+            apolloClient.query(FindByIsbnQuery(isbn)).await()
         }
     }
 
@@ -35,9 +40,15 @@ class AuthRepository_Impl(
         }
     }
 
-    override suspend fun getUserRecentSearchItems(): UserWithSearchItems {
+    override suspend fun getUserRecentSearchItems(userId: String): UserWithSearchItems {
         return withContext(Dispatchers.IO){
-            db.searchItemDao.userSearchItems()
+            db.searchItemDao.userSearchItems(userId)
+        }
+    }
+
+    override suspend fun addUserRecentSearch(searchItem: SearchItem) {
+        return withContext(Dispatchers.IO){
+            db.searchItemDao.insertSearchItem(searchItem)
         }
     }
 
@@ -47,11 +58,16 @@ class AuthRepository_Impl(
         }
     }
 
+    override suspend fun addToReadingList(book: BookInput): Response<AddToReadingListMutation.Data> {
+        return withContext(Dispatchers.IO){
+            apolloClient.mutate(AddToReadingListMutation(book)).await()
+        }
+    }
 
-//    override suspend fun getUserBooks(userId:Int): LiveData<List<UsersBooks>> {
-//        return withContext(Dispatchers.IO){
-//            db.databaseBookDao.getUserBooks(userId)
-//        }
-//    }
+    override suspend fun doesUserBookExist(isbn: String): Response<DoesUserBookExistQuery.Data> {
+        return withContext(Dispatchers.IO){
+            apolloClient.query(DoesUserBookExistQuery(isbn)).await()
+        }
+    }
 
 }

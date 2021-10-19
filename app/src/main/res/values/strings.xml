@@ -20,4 +20,7 @@
     <string name="search">Search</string>
     <string name="clubs">Clubs</string>
     <string name="clear_search">Clear search item</string>
+    <string name="plus_reading_list">+ Reading List</string>
+    <string name="success_add_to_reading_list">Book added to reading list!</string>
+    <string name="failed_add_to_reading_list">Failed to add book</string>
 </resources>

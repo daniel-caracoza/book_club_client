@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-            name="viewModel"
-            type="com.example.bookclub.viewModels.SearchViewModel" />
+            name="clickListener"
+            type="com.example.bookclub.RecentSearchListAdapter.RecentSearchItemListener" />
+
         <variable
             name="searchItem"
             type="com.example.bookclub.models.SearchItem" />
@@ -13,29 +15,35 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:onClick="@{() -> clickListener.onClick(searchItem)}"
             android:text="@{searchItem.searchTerm}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete_recent_search_item"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
+            android:id="@+id/delete_recent_search_item"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/clear_search"
+            android:onClick="@{() -> clickListener.onDelete(searchItem)}"
             android:src="@drawable/ic_baseline_close_24"
-            android:onClick="@{() -> viewModel.deleteSearchItem(searchItem)}"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/clear_search" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

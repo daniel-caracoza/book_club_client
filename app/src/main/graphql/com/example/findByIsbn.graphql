@@ -1,0 +1,11 @@
+query FindByIsbn($isbn: String!){
+    findByISBN(isbn: $isbn){
+        title
+        image
+        publisher
+        isbn13
+        synopsys
+        pages
+        authors
+    }
+}

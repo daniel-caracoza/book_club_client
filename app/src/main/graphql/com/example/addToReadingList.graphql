@@ -1,0 +1,5 @@
+mutation AddToReadingList($book:BookInput!){
+    addToReadingList(book:$book){
+        id
+    }
+}

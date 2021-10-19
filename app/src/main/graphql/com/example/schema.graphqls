@@ -3,7 +3,10 @@ type Query {
   getClubs: [Club!]
   clubTopics(clubId: String!): [ClubTopic!]
   topicComments(clubTopicId: String!): [Comment!]!
+  getInvites: [Invite!]!
   apiServiceSearch(route: String!, searchTerm: String!): [ApiServiceSearchResponse!]
+  findByISBN(isbn: String!): ApiServiceSearchResponse
+  doesUserBookExist(bookId: String!): Boolean!
   userBooks: [Book!]
 }
 
@@ -35,6 +38,13 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type Invite {
+  id: ID!
+  sender: String!
+  clubId: String!
+  clubName: String!
+}
+
 type ApiServiceSearchResponse {
   title: String!
   image: String!
@@ -60,6 +70,7 @@ type Mutation {
   createClub(clubName: String!, clubId: String!): Club!
   createTopic(topic: String!, clubId: String!): ClubTopic
   topicComment(comment: String!, clubTopicId: String!): Comment
+  createClubInvite(invitee_username: String!, clubName: String!, clubId: String!): Invite
   addToReadingList(book: BookInput!): Book!
 }
 

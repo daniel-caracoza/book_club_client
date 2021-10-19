@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.RecentSearchItemBinding
 import com.example.bookclub.models.SearchItem
 
-class RecentSearchListAdapter: ListAdapter<SearchItem, RecentSearchListAdapter.ViewHolder>(RecentSearchItemDiffCallback()) {
+class RecentSearchListAdapter(val listener: RecentSearchItemListener): ListAdapter<SearchItem, RecentSearchListAdapter.ViewHolder>(RecentSearchItemDiffCallback()) {
 
     class ViewHolder private constructor(val binding: RecentSearchItemBinding): RecyclerView.ViewHolder(binding.root){
 
@@ -21,7 +21,8 @@ class RecentSearchListAdapter: ListAdapter<SearchItem, RecentSearchListAdapter.V
             }
         }
 
-        fun bind(searchItem: SearchItem){
+        fun bind(searchItem: SearchItem, listener: RecentSearchItemListener){
+            binding.clickListener = listener
             binding.searchItem = searchItem
         }
     }
@@ -31,8 +32,18 @@ class RecentSearchListAdapter: ListAdapter<SearchItem, RecentSearchListAdapter.V
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
+
+    interface RecentSearchItemListener {
+        fun onClick(searchItem: SearchItem)
+
+        fun onDelete(searchItem: SearchItem)
+    }
+//    class RecentSearchItemListener(val listener: (searchItem: SearchItem) -> Unit){
+//
+//        fun onClick(searchItem: SearchItem) = listener(searchItem)
+//    }
 }
 
 class RecentSearchItemDiffCallback: DiffUtil.ItemCallback<SearchItem>(){

@@ -5,26 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.bookclub.databinding.FragmentSearchResultBinding
+import com.example.bookclub.viewModels.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
 
-    private val arguements: SearchResultFragmentArgs by navArgs()
+    private val arguments: SearchResultFragmentArgs by navArgs()
+    private val viewModel: SearchResultViewModel by hiltNavGraphViewModels(R.id.nav_graph)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_result, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.result_textview).text = arguements.searchTerm
+    ): View {
+        val binding: FragmentSearchResultBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
+        val adapter = SearchResultAdapter(SearchResultAdapter.SearchResultItemListener { isbn: String ->
+            val directions = SearchResultFragmentDirections.actionSearchResultFragmentToSearchBookFragment(isbn)
+            findNavController().navigate(directions)
+        })
+        binding.searchResultList.adapter = adapter
+        viewModel.searchResults(arguments.searchTerm, "books").observe(viewLifecycleOwner, {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+        return binding.root
     }
 
 }

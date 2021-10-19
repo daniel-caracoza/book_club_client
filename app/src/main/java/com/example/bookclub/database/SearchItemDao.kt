@@ -15,6 +15,6 @@ interface SearchItemDao {
     fun deleteSearchItem(searchItem: SearchItem)
 
     @Transaction
-    @Query("SELECT * FROM User")
-    fun userSearchItems(): UserWithSearchItems
+    @Query("SELECT * FROM User where userId=:userId")
+    fun userSearchItems(userId: String): UserWithSearchItems
 }
