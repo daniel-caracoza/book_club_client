@@ -1,5 +1,5 @@
-query ApiServiceSearch($searchTerm:String!, $route:String!){
-    apiServiceSearch(searchTerm:$searchTerm, route:$route){
+query ApiServiceSearch($searchTerm:String!, $route:String!, $page: Int!){
+    apiServiceSearch(searchTerm:$searchTerm, route:$route, page: $page){
         title
         image
         isbn13

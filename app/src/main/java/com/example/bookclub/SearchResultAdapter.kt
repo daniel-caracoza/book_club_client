@@ -2,13 +2,14 @@ package com.example.bookclub
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.SearchResultItemBinding
 import com.example.bookclub.models.SearchResultItem
 
-class SearchResultAdapter(val listener: SearchResultItemListener): ListAdapter<SearchResultItem, SearchResultAdapter.ViewHolder>(SearchResultItemDiffCallback()) {
+class SearchResultAdapter(val listener: SearchResultItemListener): PagingDataAdapter<SearchResultItem, SearchResultAdapter.ViewHolder>(SearchResultItemDiffCallback()) {
 
     class ViewHolder private constructor(val binding: SearchResultItemBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -31,7 +32,7 @@ class SearchResultAdapter(val listener: SearchResultItemListener): ListAdapter<S
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position)!!, listener)
     }
 
     class SearchResultItemListener(val listener: (isbn: String) -> Unit){

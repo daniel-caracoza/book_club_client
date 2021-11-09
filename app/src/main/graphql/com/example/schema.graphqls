@@ -4,7 +4,7 @@ type Query {
   clubTopics(clubId: String!): [ClubTopic!]
   topicComments(clubTopicId: String!): [Comment!]!
   getInvites: [Invite!]!
-  apiServiceSearch(route: String!, searchTerm: String!): [ApiServiceSearchResponse!]
+  apiServiceSearch(page: Int!, route: String!, searchTerm: String!): [ApiServiceSearchResponse!]
   findByISBN(isbn: String!): ApiServiceSearchResponse
   doesUserBookExist(bookId: String!): Boolean!
   userBooks: [Book!]

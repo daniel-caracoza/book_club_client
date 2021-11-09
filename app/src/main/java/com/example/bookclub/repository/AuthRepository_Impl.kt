@@ -1,14 +1,20 @@
 package com.example.bookclub.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import com.example.*
+import com.example.bookclub.data.ApiPagingSource
 import com.example.bookclub.database.Database
 import com.example.bookclub.models.SearchItem
+import com.example.bookclub.models.SearchResultItem
 import com.example.bookclub.models.UserWithSearchItems
 import com.example.type.BookInput
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class AuthRepository_Impl(
@@ -16,10 +22,11 @@ class AuthRepository_Impl(
     private val db: Database
 ): AuthRepository {
 
-    override suspend fun apiServiceSearch(searchTerm: String, route: String): Response<ApiServiceSearchQuery.Data> {
-        return withContext(Dispatchers.IO){
-            apolloClient.query(ApiServiceSearchQuery(searchTerm, route)).await()
-        }
+    override fun apiServiceSearch(searchTerm: String, route: String): Flow<PagingData<SearchResultItem>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+            pagingSourceFactory = { ApiPagingSource(apolloClient, searchTerm, route)}
+        ).flow
     }
 
     override suspend fun findByISBN(isbn: String): Response<FindByIsbnQuery.Data> {

@@ -1,15 +1,18 @@
 package com.example.bookclub.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
 import com.apollographql.apollo.api.Response
 import com.example.*
 import com.example.bookclub.models.SearchItem
+import com.example.bookclub.models.SearchResultItem
 import com.example.bookclub.models.UserWithSearchItems
 import com.example.type.BookInput
+import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
 
-    suspend fun apiServiceSearch(searchTerm: String, route: String): Response<ApiServiceSearchQuery.Data>
+    fun apiServiceSearch(searchTerm: String, route: String): Flow<PagingData<SearchResultItem>>
 
     suspend fun findByISBN(isbn: String): Response<FindByIsbnQuery.Data>
 

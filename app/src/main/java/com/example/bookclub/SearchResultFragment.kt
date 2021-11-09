@@ -7,11 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bookclub.databinding.FragmentSearchResultBinding
 import com.example.bookclub.viewModels.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
@@ -29,11 +34,15 @@ class SearchResultFragment : Fragment() {
             findNavController().navigate(directions)
         })
         binding.searchResultList.adapter = adapter
-        viewModel.searchResults(arguments.searchTerm, "books").observe(viewLifecycleOwner, {
-            it?.let {
-                adapter.submitList(it)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.searchResults(arguments.searchTerm, "books").collectLatest { searchResultItems ->
+                    adapter.submitData(searchResultItems)
+                }
             }
-        })
+        }
+
         return binding.root
     }
 
