@@ -5,48 +5,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.work.ListenableWorker
-import com.example.bookclub.databinding.FragmentClubsBinding
-import com.example.bookclub.ui.ClubListAdapter
+import com.example.bookclub.databinding.FragmentSelectClubBookBinding
+import com.example.bookclub.ui.SelectClubBookAdapter
 import com.example.bookclub.utils.showError
-import com.example.bookclub.viewModels.ClubsViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.bookclub.viewModels.SelectClubBookViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-@AndroidEntryPoint
-class ClubsFragment : Fragment() {
+class SelectClubBookFragment : Fragment() {
 
-    private val viewModel: ClubsViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-
+    private val viewModel: SelectClubBookViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        val binding: FragmentClubsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_clubs, container, false)
-        val adapter = ClubListAdapter(ClubListAdapter.ClubItemListener {
-            TODO("this is where a click of a club leads to topics")
-        })
-
-        binding.addClub.setOnClickListener {
-            val directions = ClubsFragmentDirections.actionClubsFragmentToSelectClubBookFragment()
+        val binding: FragmentSelectClubBookBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_club_book, container, false)
+        val adapter = SelectClubBookAdapter(SelectClubBookAdapter.SelectClubBookListener {
+            val directions = SelectClubBookFragmentDirections.actionSelectClubBookFragmentToCreateClubFragment()
             findNavController().navigate(directions)
-        }
-
-        binding.clubList.adapter = adapter
-
+        })
+        binding.bookList.adapter = adapter
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.clubsState.collect { uiState ->
+                viewModel.state.collect { uiState ->
                     uiState.onSuccess {
                         adapter.submitList(it)
                     }
@@ -58,4 +45,5 @@ class ClubsFragment : Fragment() {
         }
         return binding.root
     }
+
 }

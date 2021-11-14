@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.ReadingListItemBinding
 import com.example.bookclub.models.DatabaseBook
-import com.example.bookclub.models.SearchItem
 
 class ReadingListAdapter: ListAdapter<DatabaseBook, ReadingListAdapter.ViewHolder>(ReadingListItemDiffCallback()) {
 

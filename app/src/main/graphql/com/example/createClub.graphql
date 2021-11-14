@@ -1,0 +1,5 @@
+mutation CreateClub($clubId: String!, $clubName: String!){
+    createClub(clubId: $clubId, clubName: $clubName){
+        clubName
+    }
+}

@@ -40,10 +40,6 @@ class RecentSearchListAdapter(val listener: RecentSearchItemListener): ListAdapt
 
         fun onDelete(searchItem: SearchItem)
     }
-//    class RecentSearchItemListener(val listener: (searchItem: SearchItem) -> Unit){
-//
-//        fun onClick(searchItem: SearchItem) = listener(searchItem)
-//    }
 }
 
 class RecentSearchItemDiffCallback: DiffUtil.ItemCallback<SearchItem>(){

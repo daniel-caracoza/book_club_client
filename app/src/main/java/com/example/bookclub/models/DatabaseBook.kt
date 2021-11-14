@@ -2,6 +2,7 @@ package com.example.bookclub.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.UserBooksForClubCreationQuery
 import com.example.UserBooksQuery
 
 @Entity(tableName = "books")
@@ -15,7 +16,7 @@ data class DatabaseBook (
 
     val author: String,
 
-    var currentPage: Int = 0)
+    var currentPage: Int? = 0)
 
 fun List<UserBooksQuery.UserBook>.mapToDatabaseBook(): List<DatabaseBook> {
     return map {
@@ -28,3 +29,16 @@ fun List<UserBooksQuery.UserBook>.mapToDatabaseBook(): List<DatabaseBook> {
         )
     }
 }
+
+fun List<UserBooksForClubCreationQuery.UserBook>.mapToClubDatabaseBook(): List<DatabaseBook> {
+    return map {
+        DatabaseBook(
+            it.id,
+            it.bookTitle,
+            it.image,
+            it.author
+        )
+    }
+}
+
+

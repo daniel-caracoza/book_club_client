@@ -22,6 +22,18 @@ class AuthRepository_Impl(
     private val db: Database
 ): AuthRepository {
 
+    override suspend fun getBooksForClubCreation(): Response<UserBooksForClubCreationQuery.Data> {
+        return withContext(Dispatchers.IO) {
+            apolloClient.query(UserBooksForClubCreationQuery()).await()
+        }
+    }
+
+    override suspend fun getUserClubs(): Response<GetClubsQuery.Data> {
+        return withContext(Dispatchers.IO){
+            apolloClient.query(GetClubsQuery()).await()
+        }
+    }
+
     override fun apiServiceSearch(searchTerm: String, route: String): Flow<PagingData<SearchResultItem>> {
         return Pager(
             config = PagingConfig(pageSize = 20, enablePlaceholders = false),

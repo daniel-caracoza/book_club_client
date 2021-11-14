@@ -7,3 +7,12 @@ query UserBooks{
         currentPage
     }
 }
+
+query UserBooksForClubCreation {
+    userBooks {
+        id
+        bookTitle
+        author
+        image
+    }
+}

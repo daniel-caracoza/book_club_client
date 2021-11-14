@@ -45,7 +45,11 @@
         android:id="@+id/clubsFragment"
         android:name="com.example.bookclub.ClubsFragment"
         android:label="fragment_clubs"
-        tools:layout="@layout/fragment_clubs" />
+        tools:layout="@layout/fragment_clubs" >
+        <action
+            android:id="@+id/action_clubsFragment_to_selectClubBookFragment"
+            app:destination="@id/selectClubBookFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.example.bookclub.SearchResultFragment"
@@ -66,5 +70,19 @@
         <argument
             android:name="isbn"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createClubFragment"
+        android:name="com.example.bookclub.CreateClubFragment"
+        android:label="fragment_create_club"
+        tools:layout="@layout/fragment_create_club" />
+    <fragment
+        android:id="@+id/selectClubBookFragment"
+        android:name="com.example.bookclub.SelectClubBookFragment"
+        android:label="fragment_select_club_book"
+        tools:layout="@layout/fragment_select_club_book" >
+        <action
+            android:id="@+id/action_selectClubBookFragment_to_createClubFragment"
+            app:destination="@id/createClubFragment" />
     </fragment>
 </navigation>

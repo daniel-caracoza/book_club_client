@@ -1,6 +1,5 @@
 package com.example.bookclub.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.apollographql.apollo.api.Response
 import com.example.*
@@ -11,6 +10,10 @@ import com.example.type.BookInput
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
+
+    suspend fun getBooksForClubCreation(): Response<UserBooksForClubCreationQuery.Data>
+
+    suspend fun getUserClubs(): Response<GetClubsQuery.Data>
 
     fun apiServiceSearch(searchTerm: String, route: String): Flow<PagingData<SearchResultItem>>
 
