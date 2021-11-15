@@ -56,7 +56,7 @@ type ApiServiceSearchResponse {
 }
 
 type Book {
-  id: Float!
+  id: String!
   bookTitle: String!
   image: String!
   author: String!

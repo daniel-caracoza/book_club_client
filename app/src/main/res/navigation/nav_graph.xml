@@ -75,7 +75,11 @@
         android:id="@+id/createClubFragment"
         android:name="com.example.bookclub.CreateClubFragment"
         android:label="fragment_create_club"
-        tools:layout="@layout/fragment_create_club" />
+        tools:layout="@layout/fragment_create_club" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookclub.models.DatabaseBook" />
+    </fragment>
     <fragment
         android:id="@+id/selectClubBookFragment"
         android:name="com.example.bookclub.SelectClubBookFragment"

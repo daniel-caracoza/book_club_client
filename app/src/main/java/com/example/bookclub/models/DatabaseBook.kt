@@ -4,11 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.UserBooksForClubCreationQuery
 import com.example.UserBooksQuery
+import java.io.Serializable
 
 @Entity(tableName = "books")
 data class DatabaseBook (
     @PrimaryKey
-    val bookId: Double,
+    val bookId: Long,
 
     val bookTitle: String,
 
@@ -16,12 +17,12 @@ data class DatabaseBook (
 
     val author: String,
 
-    var currentPage: Int? = 0)
+    var currentPage: Int? = 0): Serializable
 
 fun List<UserBooksQuery.UserBook>.mapToDatabaseBook(): List<DatabaseBook> {
     return map {
         DatabaseBook(
-            it.id,
+            it.id.toLong(),
             it.bookTitle,
             it.image,
             it.author,
@@ -33,7 +34,7 @@ fun List<UserBooksQuery.UserBook>.mapToDatabaseBook(): List<DatabaseBook> {
 fun List<UserBooksForClubCreationQuery.UserBook>.mapToClubDatabaseBook(): List<DatabaseBook> {
     return map {
         DatabaseBook(
-            it.id,
+            it.id.toLong(),
             it.bookTitle,
             it.image,
             it.author

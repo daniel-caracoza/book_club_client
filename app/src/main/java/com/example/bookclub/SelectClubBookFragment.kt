@@ -26,8 +26,8 @@ class SelectClubBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding: FragmentSelectClubBookBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_club_book, container, false)
-        val adapter = SelectClubBookAdapter(SelectClubBookAdapter.SelectClubBookListener {
-            val directions = SelectClubBookFragmentDirections.actionSelectClubBookFragmentToCreateClubFragment()
+        val adapter = SelectClubBookAdapter(SelectClubBookAdapter.SelectClubBookListener { book ->
+            val directions = SelectClubBookFragmentDirections.actionSelectClubBookFragmentToCreateClubFragment(book)
             findNavController().navigate(directions)
         })
         binding.bookList.adapter = adapter
