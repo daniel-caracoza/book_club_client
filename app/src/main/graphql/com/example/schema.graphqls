@@ -17,7 +17,7 @@ type User {
 }
 
 type Club {
-  id: Float!
+  id: String!
   clubName: String!
 }
 

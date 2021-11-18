@@ -26,4 +26,7 @@
     <string name="create_club">Create Club</string>
     <string name="search_new_book">search new book</string>
     <string name="image_of_book">image of book</string>
+    <string name="book_name">Book Name:</string>
+    <string name="club_name">Club Name</string>
+    <string name="selected_book">Selected Book</string>
 </resources>

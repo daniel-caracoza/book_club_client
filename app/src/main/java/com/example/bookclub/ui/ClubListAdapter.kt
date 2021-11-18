@@ -27,7 +27,7 @@ class ClubListAdapter(val listener: ClubItemListener): ListAdapter<Club, ClubLis
         }
     }
 
-    class ClubItemListener(val listener: (id: Double) -> Unit) {
+    class ClubItemListener(val listener: (id: String) -> Unit) {
         fun onClick(club: Club) = listener(club.id)
     }
 

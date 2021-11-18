@@ -17,9 +17,10 @@ import com.example.bookclub.databinding.FragmentLoginBinding
 import com.example.bookclub.dependency_injection.RefreshTokenCoroutineWorker
 import com.example.bookclub.viewModels.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by hiltNavGraphViewModels(R.id.nav_graph)

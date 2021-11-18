@@ -3,7 +3,7 @@ package com.example.bookclub.models
 import com.example.GetClubsQuery
 
 data class Club(
-    val id: Double,
+    val id: String,
     val clubName: String
 )
 

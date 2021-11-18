@@ -5,14 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.work.ListenableWorker
 import com.example.bookclub.databinding.FragmentClubsBinding
 import com.example.bookclub.ui.ClubListAdapter
 import com.example.bookclub.utils.showError
@@ -20,7 +18,6 @@ import com.example.bookclub.viewModels.ClubsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 @AndroidEntryPoint
 class ClubsFragment : Fragment() {

@@ -15,9 +15,11 @@ import com.example.bookclub.databinding.FragmentSelectClubBookBinding
 import com.example.bookclub.ui.SelectClubBookAdapter
 import com.example.bookclub.utils.showError
 import com.example.bookclub.viewModels.SelectClubBookViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SelectClubBookFragment : Fragment() {
 
     private val viewModel: SelectClubBookViewModel by hiltNavGraphViewModels(R.id.nav_graph)

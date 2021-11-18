@@ -21,7 +21,6 @@ class ClubsViewModel @Inject constructor(
     val clubsState: StateFlow<Result<List<Club>>> = _mutableStateFlow
 
     init {
-
         viewModelScope.launch {
             _mutableStateFlow.value = runCatching {
                 val response = authRepository.getUserClubs()

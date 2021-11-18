@@ -17,6 +17,7 @@ class RefreshTokenCoroutineWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
 ): CoroutineWorker(appContext, workerParams) {
+
     @Inject lateinit var authRepository: AuthRepository
 
     @Inject lateinit var sharedPreferences: SharedPreferences
@@ -35,5 +36,4 @@ class RefreshTokenCoroutineWorker @AssistedInject constructor(
             Result.failure()
         }
     }
-
 }
