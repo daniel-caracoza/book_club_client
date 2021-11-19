@@ -16,18 +16,16 @@ class ClubsViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ): ViewModel() {
 
-    private val _mutableStateFlow = MutableStateFlow<Result<List<Club>>>(Result.success(emptyList()))
-
-    val clubsState: StateFlow<Result<List<Club>>> = _mutableStateFlow
-
-    init {
+    fun refreshUserClubs(): StateFlow<Result<List<Club>>> {
+        val mutableStateFlow = MutableStateFlow<Result<List<Club>>>(Result.success(emptyList()))
         viewModelScope.launch {
-            _mutableStateFlow.value = runCatching {
+            mutableStateFlow.value = runCatching {
                 val response = authRepository.getUserClubs()
                 val clubs = response.data?.getClubs ?: return@launch
                 clubs.mapToDomainClub()
             }
         }
+        return mutableStateFlow
     }
 
 }

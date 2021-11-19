@@ -50,10 +50,12 @@ class RegisterFragment : Fragment() {
             }
         })
         viewModel.registerSuccess.observe(viewLifecycleOwner, {
-            it?.let {
-                Toast.makeText(requireContext(), getString(R.string.register_success), Toast.LENGTH_SHORT).show()
-                // ??
-                findNavController().popBackStack()
+            it?.let { registrationSuccessful ->
+                if(registrationSuccessful){
+                    Toast.makeText(requireContext(), getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+                    // ??
+                    findNavController().popBackStack()
+                }
             }
         })
 

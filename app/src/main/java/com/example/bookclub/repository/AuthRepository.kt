@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
 
-    suspend fun createClub(clubId: String, clubName: String): Response<CreateClubMutation.Data>
+    suspend fun createClub(clubId: String, clubName: String, clubImage: String, clubBookTitle:String, clubBookAuthor: String): Response<CreateClubMutation.Data>
 
     suspend fun getBooksForClubCreation(): Response<UserBooksForClubCreationQuery.Data>
 

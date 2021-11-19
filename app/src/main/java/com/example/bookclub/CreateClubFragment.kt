@@ -26,12 +26,13 @@ class CreateClubFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding: FragmentCreateClubBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_club, container, false)
-        binding.book = args.book
+        val book = args.book
+        binding.book = book
         binding.createClub.setOnClickListener { button ->
             button.isEnabled = false
             val clubName = binding.clubNameEditText.text.toString()
             val bookId = args.book.bookId.toString()
-            vieWModel.onCreateClubClick(bookId, clubName).observe(viewLifecycleOwner, { uiState ->
+            vieWModel.onCreateClubClick(bookId, clubName, book.image, book.bookTitle, book.author).observe(viewLifecycleOwner, { uiState ->
                     uiState.onSuccess {
                         findNavController().popBackStack(R.id.clubsFragment, false)
                     }

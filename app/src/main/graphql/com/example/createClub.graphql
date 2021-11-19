@@ -1,6 +1,9 @@
-mutation CreateClub($clubId: String!, $clubName: String!){
-    createClub(clubId: $clubId, clubName: $clubName){
+mutation CreateClub($clubId: String!, $clubName: String!, $clubImage: String!, $clubBookTitle: String!, $clubBookAuthor: String!){
+    createClub(clubId: $clubId, clubName: $clubName, clubImage: $clubImage, clubBookTitle: $clubBookTitle, clubBookAuthor: $clubBookAuthor){
         id
         clubName
+        clubImage
+        clubBookTitle
+        clubBookAuthor
     }
 }

@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_clubsFragment_to_selectClubBookFragment"
             app:destination="@id/selectClubBookFragment" />
+        <action
+            android:id="@+id/action_clubsFragment_to_clubTopicsFragment"
+            app:destination="@id/clubTopicsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -88,5 +91,14 @@
         <action
             android:id="@+id/action_selectClubBookFragment_to_createClubFragment"
             app:destination="@id/createClubFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clubTopicsFragment"
+        android:name="com.example.bookclub.ClubTopicsFragment"
+        android:label="fragment_club_topics"
+        tools:layout="@layout/fragment_club_topics" >
+        <argument
+            android:name="club"
+            app:argType="com.example.bookclub.models.Club" />
     </fragment>
 </navigation>

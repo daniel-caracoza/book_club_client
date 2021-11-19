@@ -19,15 +19,15 @@ class CreateClubViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ): ViewModel() {
 
-    fun onCreateClubClick(clubId: String, clubName: String): LiveData<Result<Club>> {
+    fun onCreateClubClick(clubId: String, clubName: String, clubImage: String, clubBookTitle:String, clubBookAuthor: String): LiveData<Result<Club>> {
         val mutableLiveData = MutableLiveData<Result<Club>>()
         CoroutineScope(Dispatchers.IO).launch {
-            val response = authRepository.createClub(clubId, clubName)
+            val response = authRepository.createClub(clubId, clubName, clubImage, clubBookTitle, clubBookAuthor)
             val club = response.data?.createClub
             if(club == null || response.hasErrors()){
                 mutableLiveData.postValue(Result.failure(Exception("Unable to create Club! ")))
             } else {
-                mutableLiveData.postValue(Result.success(Club(club.id, club.clubName)))
+                mutableLiveData.postValue(Result.success(Club(club.id, club.clubName, club.clubImage, club.clubBookTitle, club.clubBookAuthor)))
             }
         }
         return mutableLiveData

@@ -23,27 +23,33 @@ import kotlinx.coroutines.launch
 class ClubsFragment : Fragment() {
 
     private val viewModel: ClubsViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    private lateinit var adapter: ClubListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding: FragmentClubsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_clubs, container, false)
-        val adapter = ClubListAdapter(ClubListAdapter.ClubItemListener {
-            TODO("this is where a click of a club leads to topics")
+        val binding: FragmentClubsBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_clubs, container, false)
+        adapter = ClubListAdapter(ClubListAdapter.ClubItemListener {
+            val directions = ClubsFragmentDirections.actionClubsFragmentToClubTopicsFragment(it)
+            findNavController().navigate(directions)
         })
 
         binding.addClub.setOnClickListener {
             val directions = ClubsFragmentDirections.actionClubsFragmentToSelectClubBookFragment()
             findNavController().navigate(directions)
         }
-
         binding.clubList.adapter = adapter
+        getUserClubs()
+        return binding.root
+    }
 
+    private fun getUserClubs() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.clubsState.collect { uiState ->
+                viewModel.refreshUserClubs().collect { uiState ->
                     uiState.onSuccess {
                         adapter.submitList(it)
                     }
@@ -53,6 +59,5 @@ class ClubsFragment : Fragment() {
                 }
             }
         }
-        return binding.root
     }
 }

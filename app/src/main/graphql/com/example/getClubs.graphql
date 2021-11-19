@@ -2,5 +2,8 @@ query GetClubs {
     getClubs {
         id
         clubName
+        clubImage
+        clubBookTitle
+        clubBookAuthor
     }
 }

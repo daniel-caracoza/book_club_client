@@ -39,6 +39,11 @@ class LoginFragment : Fragment() {
             }
         })
 
+        binding.signUpButton.setOnClickListener {
+            val directions = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+            findNavController().navigate(directions)
+        }
+
         //if login is successful, navigate to HomeFragment
         loginViewModel.loginSuccess.observe(viewLifecycleOwner, {
             it?.let {

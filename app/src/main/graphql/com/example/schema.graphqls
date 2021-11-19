@@ -19,6 +19,9 @@ type User {
 type Club {
   id: String!
   clubName: String!
+  clubImage: String!
+  clubBookTitle: String!
+  clubBookAuthor: String!
 }
 
 type ClubTopic {
@@ -67,7 +70,7 @@ type Mutation {
   register(password: String!, email: String!, username: String!): User!
   login(password: String!, username: String!): LoginResponse
   refreshAccessToken: LoginResponse
-  createClub(clubName: String!, clubId: String!): Club!
+  createClub(clubBookAuthor: String!, clubBookTitle: String!, clubImage: String!, clubName: String!, clubId: String!): Club!
   createTopic(topic: String!, clubId: String!): ClubTopic
   topicComment(comment: String!, clubTopicId: String!): Comment
   createClubInvite(invitee_username: String!, clubName: String!, clubId: String!): Invite

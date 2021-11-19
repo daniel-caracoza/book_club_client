@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -17,22 +16,55 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:onClick="@{() -> listener.onClick(club)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/book_img"
+                android:layout_width="75dp"
+                android:layout_height="100dp"
+                android:layout_margin="8dp"
+                app:bindImage="@{club.clubImage}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/image_of_book" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/club_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_margin="8dp"
                 android:text="@{club.clubName}"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintStart_toEndOf="@id/book_img"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/club_book_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{club.clubBookTitle}"
+                app:layout_constraintTop_toBottomOf="@id/club_name"
+                app:layout_constraintStart_toEndOf="@id/book_img"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/club_book_author"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{club.clubBookAuthor}"
+                app:layout_constraintTop_toBottomOf="@id/club_book_title"
+                app:layout_constraintStart_toEndOf="@id/book_img"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </layout>
