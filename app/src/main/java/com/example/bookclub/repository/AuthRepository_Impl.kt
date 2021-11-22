@@ -22,6 +22,12 @@ class AuthRepository_Impl(
     private val db: Database
 ): AuthRepository {
 
+    override suspend fun getClubTopics(clubId: String): Response<ClubTopicsQuery.Data> {
+        return withContext(Dispatchers.IO){
+            apolloClient.query(ClubTopicsQuery(clubId)).await()
+        }
+    }
+
     override suspend fun createClub(clubId: String, clubName: String, clubImage: String, clubBookTitle:String, clubBookAuthor: String): Response<CreateClubMutation.Data> {
         return withContext(Dispatchers.IO) {
             apolloClient.mutate(CreateClubMutation(clubId, clubName, clubImage, clubBookTitle, clubBookAuthor)).await()

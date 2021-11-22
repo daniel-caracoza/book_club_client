@@ -29,4 +29,6 @@
     <string name="book_name">Book Name:</string>
     <string name="club_name">Club Name</string>
     <string name="selected_book">Selected Book</string>
+    <string name="club_topics">Topics</string>
+    <string name="add_topic">Topic</string>
 </resources>

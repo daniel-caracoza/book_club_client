@@ -1,0 +1,6 @@
+query ClubTopics($clubId: String!){
+    clubTopics(clubId: $clubId){
+        id
+        topic
+    }
+}

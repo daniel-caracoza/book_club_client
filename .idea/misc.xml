@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/layout/club_list_item.xml" value="0.4134963768115942" />
+        <entry key="app/src/main/res/layout/clubtopic_list_item.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/fragment_club_topics.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/fragment_clubs.xml" value="0.4134963768115942" />
         <entry key="app/src/main/res/layout/fragment_create_club.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.375" />
