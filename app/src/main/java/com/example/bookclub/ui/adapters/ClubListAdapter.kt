@@ -1,4 +1,4 @@
-package com.example.bookclub.ui
+package com.example.bookclub.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.ClubListItemBinding
 import com.example.bookclub.models.Club
 
-class ClubListAdapter(val listener: ClubItemListener): ListAdapter<Club, ClubListAdapter.ViewHolder>(ClubItemDiffCallback()) {
+class ClubListAdapter(val listener: ClubItemListener): ListAdapter<Club, ClubListAdapter.ViewHolder>(
+    ClubItemDiffCallback()
+) {
 
     class ViewHolder private constructor(val binding: ClubListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -31,7 +33,8 @@ class ClubListAdapter(val listener: ClubItemListener): ListAdapter<Club, ClubLis
         fun onClick(club: Club) = listener(club)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), listener)

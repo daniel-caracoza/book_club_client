@@ -1,7 +1,6 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.navArgs
-import com.apollographql.apollo.exception.ApolloNetworkException
+import com.example.bookclub.R
 import com.example.bookclub.databinding.FragmentSearchBookBinding
 import com.example.bookclub.viewModels.SearchBookViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -27,7 +26,8 @@ class SearchBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentSearchBookBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_book, container, false)
+        val binding: FragmentSearchBookBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_search_book, container, false)
         viewModel.findByISBN(args.isbn).observe(viewLifecycleOwner, {
             it?.let {
                 binding.searchBook = it

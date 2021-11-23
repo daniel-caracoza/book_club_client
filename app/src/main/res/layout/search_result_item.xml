@@ -9,7 +9,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.bookclub.SearchResultAdapter.SearchResultItemListener" />
+            type="com.example.bookclub.ui.adapters.SearchResultAdapter.SearchResultItemListener" />
 
     </data>
 

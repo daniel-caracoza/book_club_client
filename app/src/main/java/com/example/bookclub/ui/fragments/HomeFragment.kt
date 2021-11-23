@@ -1,12 +1,13 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
-import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import com.example.bookclub.R
+import com.example.bookclub.ui.adapters.ReadingListAdapter
 import com.example.bookclub.databinding.FragmentHomeBinding
 import com.example.bookclub.viewModels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container,  false)
+        val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_home, container,  false)
         val adapter = ReadingListAdapter()
         binding.readingList.adapter = adapter
         viewModel.getUserBooks().observe(viewLifecycleOwner, {

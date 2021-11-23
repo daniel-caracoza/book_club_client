@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.RecentSearchItemBinding
 import com.example.bookclub.models.SearchItem
 
-class RecentSearchListAdapter(val listener: RecentSearchItemListener): ListAdapter<SearchItem, RecentSearchListAdapter.ViewHolder>(RecentSearchItemDiffCallback()) {
+class RecentSearchListAdapter(val listener: RecentSearchItemListener): ListAdapter<SearchItem, RecentSearchListAdapter.ViewHolder>(
+    RecentSearchItemDiffCallback()
+) {
 
     class ViewHolder private constructor(val binding: RecentSearchItemBinding): RecyclerView.ViewHolder(binding.root){
 

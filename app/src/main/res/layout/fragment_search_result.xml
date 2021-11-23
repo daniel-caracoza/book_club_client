@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SearchResultFragment">
+        tools:context=".ui.fragments.SearchResultFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_result_list"

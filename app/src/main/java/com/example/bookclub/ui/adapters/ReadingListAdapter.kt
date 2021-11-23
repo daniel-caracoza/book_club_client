@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.ReadingListItemBinding
 import com.example.bookclub.models.DatabaseBook
 
-class ReadingListAdapter: ListAdapter<DatabaseBook, ReadingListAdapter.ViewHolder>(ReadingListItemDiffCallback()) {
+class ReadingListAdapter: ListAdapter<DatabaseBook, ReadingListAdapter.ViewHolder>(
+    ReadingListItemDiffCallback()
+) {
 
     class ViewHolder private constructor(private val binding: ReadingListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder{
+            fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ReadingListItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)

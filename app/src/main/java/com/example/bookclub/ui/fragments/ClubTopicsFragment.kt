@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,32 +10,37 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import com.example.bookclub.databinding.FragmentSelectClubBookBinding
-import com.example.bookclub.ui.SelectClubBookAdapter
+import androidx.navigation.fragment.navArgs
+import com.example.bookclub.R
+import com.example.bookclub.databinding.FragmentClubTopicsBinding
+import com.example.bookclub.ui.adapters.ClubTopicAdapter
 import com.example.bookclub.utils.showError
-import com.example.bookclub.viewModels.SelectClubBookViewModel
+import com.example.bookclub.viewModels.ClubTopicsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SelectClubBookFragment : Fragment() {
+class ClubTopicsFragment : Fragment() {
 
-    private val viewModel: SelectClubBookViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    private val viewModel: ClubTopicsViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+
+    private val args: ClubTopicsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentSelectClubBookBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_club_book, container, false)
-        val adapter = SelectClubBookAdapter(SelectClubBookAdapter.SelectClubBookListener { book ->
-            val directions = SelectClubBookFragmentDirections.actionSelectClubBookFragmentToCreateClubFragment(book)
-            findNavController().navigate(directions)
+        val binding: FragmentClubTopicsBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_club_topics, container, false)
+        binding.club = args.club
+        val adapter = ClubTopicAdapter(ClubTopicAdapter.ClubTopicClickListener {
+            //TODO()
         })
-        binding.bookList.adapter = adapter
+        binding.clubTopicsList.adapter = adapter
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { uiState ->
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.getTopics(args.club.id).collect { uiState ->
                     uiState.onSuccess {
                         adapter.submitList(it)
                     }
@@ -47,5 +52,4 @@ class SelectClubBookFragment : Fragment() {
         }
         return binding.root
     }
-
 }

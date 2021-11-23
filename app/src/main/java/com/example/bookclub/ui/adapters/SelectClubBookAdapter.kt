@@ -1,15 +1,16 @@
-package com.example.bookclub.ui
+package com.example.bookclub.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookclub.ReadingListItemDiffCallback
 import com.example.bookclub.databinding.SelectClubBookItemBinding
 import com.example.bookclub.models.DatabaseBook
 
 
-class SelectClubBookAdapter(val listener: SelectClubBookListener): ListAdapter<DatabaseBook, SelectClubBookAdapter.ViewHolder>(ReadingListItemDiffCallback()) {
+class SelectClubBookAdapter(val listener: SelectClubBookListener): ListAdapter<DatabaseBook, SelectClubBookAdapter.ViewHolder>(
+    ReadingListItemDiffCallback()
+) {
 
     class ViewHolder private constructor(private val binding: SelectClubBookItemBinding): RecyclerView.ViewHolder(binding.root){
 

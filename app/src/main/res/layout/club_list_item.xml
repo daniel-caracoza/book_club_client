@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="com.example.bookclub.ui.ClubListAdapter.ClubItemListener" />
+            type="com.example.bookclub.ui.adapters.ClubListAdapter.ClubItemListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -6,7 +6,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.bookclub.RecentSearchListAdapter.RecentSearchItemListener" />
+            type="com.example.bookclub.ui.adapters.RecentSearchListAdapter.RecentSearchItemListener" />
 
         <variable
             name="searchItem"

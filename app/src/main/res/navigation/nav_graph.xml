@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.bookclub.RegisterFragment"
+        android:name="com.example.bookclub.ui.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.bookclub.LoginFragment"
+        android:name="com.example.bookclub.ui.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.bookclub.HomeFragment"
+        android:name="com.example.bookclub.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.bookclub.SearchFragment"
+        android:name="com.example.bookclub.ui.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/clubsFragment"
-        android:name="com.example.bookclub.ClubsFragment"
+        android:name="com.example.bookclub.ui.fragments.ClubsFragment"
         android:label="fragment_clubs"
         tools:layout="@layout/fragment_clubs" >
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.example.bookclub.SearchResultFragment"
+        android:name="com.example.bookclub.ui.fragments.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" >
         <argument
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchBookFragment"
-        android:name="com.example.bookclub.SearchBookFragment"
+        android:name="com.example.bookclub.ui.fragments.SearchBookFragment"
         android:label="fragment_search_book"
         tools:layout="@layout/fragment_search_book" >
         <argument
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/createClubFragment"
-        android:name="com.example.bookclub.CreateClubFragment"
+        android:name="com.example.bookclub.ui.fragments.CreateClubFragment"
         android:label="fragment_create_club"
         tools:layout="@layout/fragment_create_club" >
         <argument
@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/selectClubBookFragment"
-        android:name="com.example.bookclub.SelectClubBookFragment"
+        android:name="com.example.bookclub.ui.fragments.SelectClubBookFragment"
         android:label="fragment_select_club_book"
         tools:layout="@layout/fragment_select_club_book" >
         <action
@@ -94,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/clubTopicsFragment"
-        android:name="com.example.bookclub.ClubTopicsFragment"
+        android:name="com.example.bookclub.ui.fragments.ClubTopicsFragment"
         android:label="fragment_club_topics"
         tools:layout="@layout/fragment_club_topics" >
         <argument

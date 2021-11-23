@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookclub.databinding.SearchResultItemBinding
 import com.example.bookclub.models.SearchResultItem
 
-class SearchResultAdapter(val listener: SearchResultItemListener): PagingDataAdapter<SearchResultItem, SearchResultAdapter.ViewHolder>(SearchResultItemDiffCallback()) {
+class SearchResultAdapter(val listener: SearchResultItemListener): PagingDataAdapter<SearchResultItem, SearchResultAdapter.ViewHolder>(
+    SearchResultItemDiffCallback()
+) {
 
     class ViewHolder private constructor(val binding: SearchResultItemBinding): RecyclerView.ViewHolder(binding.root) {
 

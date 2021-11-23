@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,9 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.example.bookclub.R
 import com.example.bookclub.databinding.FragmentLoginBinding
 import com.example.bookclub.dependency_injection.RefreshTokenCoroutineWorker
 import com.example.bookclub.viewModels.LoginViewModel
@@ -29,7 +29,8 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentLoginBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_login, container, false)
+        val binding: FragmentLoginBinding = DataBindingUtil.inflate(layoutInflater,
+            R.layout.fragment_login, container, false)
         binding.viewModel = loginViewModel
 
         //checks to see if login button is enabled dependent if fields are filled

@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.bookclub.R
 import com.example.bookclub.databinding.FragmentRegisterBinding
 import com.example.bookclub.viewModels.RegisterViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint()
@@ -26,7 +26,8 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding: FragmentRegisterBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_register, container, false)
+        val binding: FragmentRegisterBinding = DataBindingUtil.inflate(layoutInflater,
+            R.layout.fragment_register, container, false)
         binding.viewModel = viewModel
 
         binding.usernameEditText.doAfterTextChanged {

@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.app.SearchManager
 import android.content.Context
@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.bookclub.R
+import com.example.bookclub.ui.adapters.RecentSearchListAdapter
 import com.example.bookclub.databinding.FragmentSearchBinding
 import com.example.bookclub.models.SearchItem
 import com.example.bookclub.viewModels.SearchViewModel
@@ -32,7 +34,8 @@ class SearchFragment : Fragment(), RecentSearchListAdapter.RecentSearchItemListe
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding: FragmentSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        val binding: FragmentSearchBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_search, container, false)
         val adapter = RecentSearchListAdapter(this)
         binding.recentSearchList.adapter = adapter
         viewModel.recentSearchItems.observe(viewLifecycleOwner, {

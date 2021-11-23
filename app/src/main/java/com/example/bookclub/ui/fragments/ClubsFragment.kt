@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,8 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.bookclub.R
 import com.example.bookclub.databinding.FragmentClubsBinding
-import com.example.bookclub.ui.ClubListAdapter
+import com.example.bookclub.ui.adapters.ClubListAdapter
 import com.example.bookclub.utils.showError
 import com.example.bookclub.viewModels.ClubsViewModel
 import dagger.hilt.android.AndroidEntryPoint

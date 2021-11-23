@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.bookclub.R
 import com.example.bookclub.databinding.FragmentCreateClubBinding
 import com.example.bookclub.utils.showError
 import com.example.bookclub.viewModels.CreateClubViewModel
@@ -25,7 +26,8 @@ class CreateClubFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentCreateClubBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_club, container, false)
+        val binding: FragmentCreateClubBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_create_club, container, false)
         val book = args.book
         binding.book = book
         binding.createClub.setOnClickListener { button ->

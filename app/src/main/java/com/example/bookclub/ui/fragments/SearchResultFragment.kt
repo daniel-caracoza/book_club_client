@@ -1,4 +1,4 @@
-package com.example.bookclub
+package com.example.bookclub.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.bookclub.R
+import com.example.bookclub.ui.adapters.SearchResultAdapter
 import com.example.bookclub.databinding.FragmentSearchResultBinding
 import com.example.bookclub.viewModels.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +30,8 @@ class SearchResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentSearchResultBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
+        val binding: FragmentSearchResultBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_search_result, container, false)
         val adapter = SearchResultAdapter(SearchResultAdapter.SearchResultItemListener { isbn: String ->
             val directions = SearchResultFragmentDirections.actionSearchResultFragmentToSearchBookFragment(isbn)
             findNavController().navigate(directions)
